@@ -2,7 +2,7 @@
 
 # Pilot
 
-The new iteration of Pagar.me's dashboard
+The next iteration of Pagar.me's dashboard.
 
 
 <br>
@@ -11,7 +11,9 @@ The new iteration of Pagar.me's dashboard
 
 This project is under development.
 
-**TODO:** Add information on how to contribute.
+## Contributing
+
+Testing Gitcop.
 
 ## Licensing
 
