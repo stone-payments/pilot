@@ -175,17 +175,17 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /\.css$/,
-            use: [
-              require.resolve('style-loader'),
-              {
-                loader: require.resolve('css-loader'),
-                options: {
-                  importLoaders: 1,
-                  modules: 1,
-                },
-              },
-              {
+              test: /\.css$/,
+              use: [
+                  require.resolve('style-loader'),
+                  {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                          importLoaders: 1,
+                          modules: 1,
+                      },
+                  },
+                  {
                 loader: require.resolve('postcss-loader'),
                 options: {
                   // Necessary for external CSS imports to work
@@ -198,6 +198,16 @@ module.exports = {
                 },
               },
             ],
+          },
+          {
+            test: /\.scss$/,
+            use: [{
+              loader: require.resolve('style-loader')
+            }, {
+              loader: require.resolve('css-loader')
+            }, {
+              loader: require.resolve('sass-loader')
+            }]
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.
