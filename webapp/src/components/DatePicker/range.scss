@@ -1,0 +1,19 @@
+.DatePicker_range {
+  .DayPickerNavigation--horizontal {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .Datepicker__ShowDate {
+    width: 280px;
+  }
+
+  .Datepicker__ShowDate_year_block {
+    padding: 0.2em 0.2em 0.2em 0.5em;
+  }
+
+  .DatePicker__pane {
+    width: $headerWidth !important;
+  }
+}

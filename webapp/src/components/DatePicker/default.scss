@@ -1,0 +1,21 @@
+.DatePicker_default {
+  .DayPicker--horizontal {
+    width: $width !important;
+    overflow: hidden !important;
+  }
+
+  .DayPickerNavigation--horizontal {
+    position: relative !important;
+    z-index: 10 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-radius: 0.1em;
+    background-color: #3ed2a4;
+  }
+
+  .transition-container--horizontal {
+    position: relative !important;
+    z-index: 11 !important;
+  }
+}
