@@ -1,6 +1,5 @@
 import React from 'react'
-import { render } from 'react-dom'
-import { shallow, mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import moment from 'moment'
 
 import DatePicker from './index'
@@ -19,8 +18,8 @@ describe('DatePicker', () => {
 
   it('should not show confirm button at first render', () => {
     const button = component
-    .find('.DatePicker_confirmation__button')
-    .exists()
+      .find('.DatePicker_confirmation__button')
+      .exists()
 
     expect(button).toEqual(false)
   })
