@@ -7,6 +7,7 @@ import {
   merge,
   omit,
   is,
+  contains,
 } from 'ramda'
 import classNames from 'classnames'
 import IconAngleLeft from 'react-icons/lib/fa/angle-left'
@@ -20,7 +21,29 @@ import ControlButtons from './ControlButtons'
 
 import './style.scss'
 
+const WEEKENDS = [0, 6]
+
 class DatePicker extends StateComponent {
+  constructor (props) {
+    super(props)
+    this.onFocusChange = this.onFocusChange.bind(this)
+    this.isDayBlocked = this.isDayBlocked.bind(this)
+  }
+
+  onFocusChange (isFocused) {
+    if (isFocused === null) { return }
+
+    if (is(Boolean, isFocused)) {
+      this.setState({ focused: isFocused })
+    } else {
+      this.setState({ focusedInput: isFocused })
+    }
+  }
+
+  isDayBlocked (day) {
+    return this.props.disableWeekends && contains(day.day(), WEEKENDS)
+  }
+
   render () {
     const {
       startDate,
@@ -32,27 +55,7 @@ class DatePicker extends StateComponent {
 
     const {
       range,
-      disableWeekends,
     } = this.props
-
-    const defaultProps = {
-      hideKeyboardShortcutsPanel: true,
-      navPrev: <IconAngleLeft />,
-      navNext: <IconAngleRight />,
-      keepOpenOnDateSelect: true,
-      readOnly: true,
-      onFocusChange: (isFocused) => {
-        if (isFocused === null) { return }
-
-        if (is(Boolean, isFocused)) {
-          this.setState({ focused: isFocused })
-        } else {
-          this.setState({ focusedInput: isFocused })
-        }
-      },
-      isDayBlocked: day =>
-        disableWeekends && (day.day() === 6 || day.day() === 0),
-    }
 
     const filteredProps = omit(
       [
@@ -98,7 +101,9 @@ class DatePicker extends StateComponent {
             )}
 
             <DateRangePicker
-              {...merge(defaultProps, filteredProps)}
+              {...merge(this.defaultProps, filteredProps)}
+              onFocusChange={this.onFocusChange}
+              isDayBlocked={this.isDayBlocked}
               startDate={startDate}
               endDate={endDate}
               focusedInput={focusedInput}
@@ -130,7 +135,9 @@ class DatePicker extends StateComponent {
             )}
 
             <SingleDatePicker
-              {...merge(defaultProps, filteredProps)}
+              {...merge(this.defaultProps, filteredProps)}
+              onFocusChange={this.onFocusChange}
+              isDayBlocked={this.isDayBlocked}
               focused={focused}
               date={date}
               numberOfMonths={1}
@@ -148,6 +155,14 @@ class DatePicker extends StateComponent {
       </div>
     )
   }
+}
+
+DatePicker.defaultProps = {
+  hideKeyboardShortcutsPanel: true,
+  navPrev: <IconAngleLeft />,
+  navNext: <IconAngleRight />,
+  keepOpenOnDateSelect: true,
+  readOnly: true,
 }
 
 export default DatePicker

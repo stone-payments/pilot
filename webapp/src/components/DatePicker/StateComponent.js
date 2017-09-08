@@ -12,16 +12,16 @@ class StateComponent extends Component {
     const {
       startDate,
     } = props
-
+    const now = moment()
     this.state = mergeAll([
       {},
       {
-        startDate: startDate ? moment(startDate) : moment(),
+        startDate: startDate ? moment(startDate) : now,
         endDate: moment('12-14-2059'),
         previewsStartDate: null,
         previewsEndDate: null,
-        date: moment(),
-        previewsDate: moment(),
+        date: now,
+        previewsDate: now,
         focusedInput: null,
       },
       props,
