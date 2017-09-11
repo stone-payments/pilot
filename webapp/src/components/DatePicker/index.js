@@ -1,12 +1,10 @@
 import React from 'react'
 import {
-  DateRangePicker,
   SingleDatePicker,
 } from 'react-dates'
 import {
   merge,
   omit,
-  contains,
 } from 'ramda'
 import classNames from 'classnames'
 import clickOutside from 'react-onclickoutside'
@@ -21,7 +19,6 @@ import ControlButtons from './ControlButtons'
 
 import './style.scss'
 
-const WEEKENDS = [0, 6]
 
 class DatePicker extends StateComponent {
   constructor (props) {
@@ -30,40 +27,22 @@ class DatePicker extends StateComponent {
     this.isDayBlocked = this.isDayBlocked.bind(this)
   }
 
-
-  isDayBlocked (day) {
-    return this.props.disableWeekends && contains(day.day(), WEEKENDS)
-  }
-
   render () {
     const {
-      startDate,
-      endDate,
-      focusedInput,
       date,
       focused,
     } = this.state
 
-    const {
-      range,
-    } = this.props
-
     const filteredProps = omit(
       [
-        'range',
         'onDateChange',
-        'onDatesChange',
         'onFocusChange',
         'disableWeekends',
       ],
       this.props
     )
 
-    const className = classNames({
-      DatePicker: true,
-      DatePicker_default: !range,
-      DatePicker_range: range,
-    })
+    const className = classNames('DatePicker', 'DatePicker_default')
 
     return (
       <div
@@ -72,77 +51,34 @@ class DatePicker extends StateComponent {
         tabIndex="0"
         style={{ display: 'inline-block' }}
       >
-        {range && (
-          <div
-            className={className}
-          >
-            {focusedInput && (
-              <div className="DatePicker__pane">
-                <ShowDate
-                  date={moment(startDate)}
-                  period="start"
-                  onPeriodChange={this.onPeriodChange}
-                />
-                <ShowDate
-                  date={moment(endDate)}
-                  period="end"
-                  onPeriodChange={this.onPeriodChange}
-                />
-              </div>
+        <div
+          className={className}
+        >
+          {focused && (
+            <div className="DatePicker__pane">
+              <ShowDate
+                date={moment(date)}
+              />
+            </div>
+          )}
+
+          <SingleDatePicker
+            {...merge(this.defaultProps, filteredProps)}
+            onFocusChange={this.onFocusChange}
+            isDayBlocked={this.isDayBlocked}
+            focused={focused}
+            date={date}
+            numberOfMonths={1}
+            onDateChange={this.onDateChange}
+            renderCalendarInfo={() => (
+              <ControlButtons
+                focused={focused}
+                onCancel={this.onClickCancelDates}
+                onConfirm={this.onClickConfirmDates}
+              />
             )}
-
-            <DateRangePicker
-              {...merge(this.defaultProps, filteredProps)}
-              onFocusChange={this.onFocusChange}
-              isDayBlocked={this.isDayBlocked}
-              startDate={startDate}
-              endDate={endDate}
-              focusedInput={focusedInput}
-              onDatesChange={this.onDatesChange}
-              startDatePlaceholderText="Inicio"
-              endDatePlaceholderText="Fim"
-              renderCalendarInfo={() => (
-                <ControlButtons
-                  focused={focused}
-                  onCancel={this.onClickCancelDates}
-                  onConfirm={this.onClickConfirmDates}
-                />
-              )}
-            />
-          </div>
-        )}
-
-        {!range && (
-          <div
-            className={className}
-          >
-            {focused && (
-              <div className="DatePicker__pane">
-                <ShowDate
-                  date={moment(date)}
-                  onYearChange={this.onYearChange}
-                />
-              </div>
-            )}
-
-            <SingleDatePicker
-              {...merge(this.defaultProps, filteredProps)}
-              onFocusChange={this.onFocusChange}
-              isDayBlocked={this.isDayBlocked}
-              focused={focused}
-              date={date}
-              numberOfMonths={1}
-              onDateChange={this.onDateChange}
-              renderCalendarInfo={() => (
-                <ControlButtons
-                  focused={focused}
-                  onCancel={this.onClickCancelDates}
-                  onConfirm={this.onClickConfirmDates}
-                />
-              )}
-            />
-          </div>
-        )}
+          />
+        </div>
       </div>
     )
   }

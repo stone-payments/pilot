@@ -63,15 +63,6 @@ storiesOf('DatePicker', module)
       />
     </Article>
   ))
-  .add('Escolha um periodo de datas', () => (
-    <Article>
-      <DatePicker
-        range
-        onDatesChange={action('onDatesChange')}
-        onFocusChange={action('onFocusChange')}
-      />
-    </Article>
-  ))
   .add('Dias desabilitados', () => (
     <Article>
       <div
@@ -85,15 +76,5 @@ storiesOf('DatePicker', module)
           disableWeekends
         />
       </div>
-    </Article>
-  ))
-  .add('Periodo com dias desabilitados', () => (
-    <Article>
-      <DatePicker
-        range
-        onDatesChange={action('onDatesChange')}
-        onFocusChange={action('onFocusChange')}
-        disableWeekends
-      />
     </Article>
   ))

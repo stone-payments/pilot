@@ -1,43 +1,34 @@
 import { Component } from 'react'
-import { func, bool, instanceOf } from 'prop-types'
+import { func, bool } from 'prop-types'
 import {
   mergeAll,
   is,
+  contains,
 } from 'ramda'
 import moment from './moment'
+
+const WEEKENDS = [0, 6]
 
 class StateComponent extends Component {
   constructor (props) {
     super(props)
 
-    const {
-      startDate,
-    } = props
     const now = moment()
     this.state = mergeAll([
       {
-        startDate: startDate ? moment(startDate) : now,
-        endDate: moment('12-14-2059'),
-        previewsStartDate: null,
-        previewsEndDate: null,
         date: now,
         previewsDate: now,
-        focusedInput: null,
         focused: null,
       },
       props,
     ])
 
-    this.onDatesChange = this.onDatesChange.bind(this)
     this.onDateChange = this.onDateChange.bind(this)
-    this.onRangeFocusChange = this.onRangeFocusChange.bind(this)
     this.onFocusChange = this.onFocusChange.bind(this)
     this.onSingleFocusChange = this.onSingleFocusChange.bind(this)
     this.onClickCancelDates = this.onClickCancelDates.bind(this)
     this.onClickConfirmDates = this.onClickConfirmDates.bind(this)
-    this.onPeriodChange = this.onPeriodChange.bind(this)
     this.toggleOpen = this.toggleOpen.bind(this)
-    this.onYearChange = this.onYearChange.bind(this)
   }
 
   onDatesChange ({ startDate, endDate }) {
@@ -51,14 +42,6 @@ class StateComponent extends Component {
     this.setState({
       date,
     })
-  }
-
-  onRangeFocusChange (focusedInput) {
-    this.setState({
-      focusedInput,
-    })
-
-    this.props.onFocusChange({ focusedInput })
   }
 
   onFocusChange ({ focused }) {
@@ -80,56 +63,29 @@ class StateComponent extends Component {
   }
 
   onClickCancelDates () {
+    console.log('happened')
+
     const {
-      previewsStartDate,
-      previewsEndDate,
       previewsDate,
     } = this.state
 
-    const {
-      range,
-    } = this.props
-
-    if (range) {
-      this.setState({
-        startDate: previewsStartDate,
-        endDate: previewsEndDate,
-        focusedInput: null,
-      })
-    } else {
-      this.setState({
-        date: previewsDate,
-        focused: false,
-      })
-    }
+    this.setState({
+      date: previewsDate,
+      focused: false,
+    })
   }
 
   onClickConfirmDates () {
     const {
-      startDate,
-      endDate,
       date,
     } = this.state
 
-    if (this.props.range) {
-      this.setState({
-        previewsStartDate: startDate,
-        previewsEndDate: endDate,
-        focusedInput: null,
-      })
+    this.setState({
+      previewsDate: date,
+      focused: false,
+    })
 
-      this.props.onDatesChange({
-        startDate,
-        endDate,
-      })
-    } else {
-      this.setState({
-        previewsDate: date,
-        focused: false,
-      })
-
-      this.props.onDateChange(date)
-    }
+    this.props.onDateChange(date)
   }
 
   onPeriodChange (period) {
@@ -152,30 +108,24 @@ class StateComponent extends Component {
     })
   }
 
+  isDayBlocked (day) {
+    return this.props.disableWeekends && contains(day.day(), WEEKENDS)
+  }
+
   handleClickOutside () {
     this.setState({
       focused: false,
-      focusedInput: false,
     })
+
+    this.onClickConfirmDates()
   }
 
   toggleOpen () {
     const {
       focused,
-      focusedInput,
     } = this.state
 
-    const {
-      range,
-    } = this.props
-
-    if (range && !focusedInput) {
-      this.setState({
-        focusedInput: 'startDate',
-      })
-    }
-
-    if (!range && !focused) {
+    if (!focused) {
       this.setState({ focused: true })
     }
   }
@@ -183,18 +133,14 @@ class StateComponent extends Component {
 
 StateComponent.propTypes = {
   onFocusChange: func,
-  onDatesChange: func,
   onDateChange: func,
-  range: bool,
-  startDate: instanceOf(moment),
+  disableWeekends: bool,
 }
 
 StateComponent.defaultProps = {
   onFocusChange: null,
-  onDatesChange: null,
   onDateChange: null,
-  startDate: null,
-  range: false,
+  disableWeekends: false,
 }
 
 export default StateComponent
