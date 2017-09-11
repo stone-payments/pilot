@@ -30,20 +30,16 @@ storiesOf('DatePicker', module)
         onDateChange={action('onDateChange')}
         onFocusChange={action('onFocusChange')}
         enableOutsideDays
-        monthFormat="MMMM"
-        displayFormat="DD/MMMM/YY"
       />
     </Article>
   ))
   .add('DatePicker disabled', () => (
     <Article>
       <DatePicker
-        disabled
+        disabled={false}
         onDateChange={action('onDateChange')}
         onFocusChange={action('onFocusChange')}
         enableOutsideDays
-        monthFormat="MMMM"
-        displayFormat="DD/MMMM/YY"
       />
     </Article>
   ))
@@ -54,8 +50,6 @@ storiesOf('DatePicker', module)
         onDateChange={action('onDateChange')}
         onFocusChange={action('onFocusChange')}
         enableOutsideDays
-        monthFormat="MMMM"
-        displayFormat="DD/MMMM/YY"
       />
     </Article>
   ))
@@ -66,20 +60,6 @@ storiesOf('DatePicker', module)
         onDateChange={action('onDateChange')}
         onFocusChange={action('onFocusChange')}
         enableOutsideDays
-        monthFormat="MMMM"
-        displayFormat="DD/MMMM/YY"
-      />
-    </Article>
-  ))
-  .add('DatePicker screenReaderInputMessage', () => (
-    <Article>
-      <DatePicker
-        screenReaderInputMessage
-        onDateChange={action('onDateChange')}
-        onFocusChange={action('onFocusChange')}
-        enableOutsideDays
-        monthFormat="MMMM"
-        displayFormat="DD/MMMM/YY"
       />
     </Article>
   ))

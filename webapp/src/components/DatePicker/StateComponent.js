@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { func, bool, instanceOf } from 'prop-types'
 import {
   mergeAll,
+  is,
 } from 'ramda'
 import moment from './moment'
 
@@ -14,7 +15,6 @@ class StateComponent extends Component {
     } = props
     const now = moment()
     this.state = mergeAll([
-      {},
       {
         startDate: startDate ? moment(startDate) : now,
         endDate: moment('12-14-2059'),
@@ -23,6 +23,7 @@ class StateComponent extends Component {
         date: now,
         previewsDate: now,
         focusedInput: null,
+        focused: null,
       },
       props,
     ])
@@ -31,6 +32,7 @@ class StateComponent extends Component {
     this.onDateChange = this.onDateChange.bind(this)
     this.onRangeFocusChange = this.onRangeFocusChange.bind(this)
     this.onFocusChange = this.onFocusChange.bind(this)
+    this.onSingleFocusChange = this.onSingleFocusChange.bind(this)
     this.onClickCancelDates = this.onClickCancelDates.bind(this)
     this.onClickConfirmDates = this.onClickConfirmDates.bind(this)
     this.onPeriodChange = this.onPeriodChange.bind(this)
@@ -65,6 +67,16 @@ class StateComponent extends Component {
     })
 
     this.props.onFocusChange({ focused })
+  }
+
+  onSingleFocusChange (isFocused) {
+    if (isFocused === null) { return }
+
+    if (is(Boolean, isFocused)) {
+      this.setState({ focused: isFocused })
+    } else {
+      this.setState({ focusedInput: isFocused })
+    }
   }
 
   onClickCancelDates () {
@@ -137,6 +149,13 @@ class StateComponent extends Component {
 
     this.setState({
       date: date.year(value),
+    })
+  }
+
+  handleClickOutside () {
+    this.setState({
+      focused: false,
+      focusedInput: false,
     })
   }
 

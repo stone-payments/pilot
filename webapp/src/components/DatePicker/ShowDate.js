@@ -7,40 +7,12 @@ import {
 import moment from 'moment'
 import { is } from 'ramda'
 import classnames from 'classnames'
-import shortid from 'shortid'
-
-import IconAngleBottom from 'react-icons/lib/fa/angle-down'
-
-const constantLabelId = shortid.generate()
-
-const availableYears = [
-  2013,
-  2014,
-  2015,
-  2016,
-  2017,
-  2018,
-  2019,
-  2020,
-  2021,
-  2022,
-  2023,
-  2024,
-  2025,
-  2026,
-  2027,
-  2028,
-  2029,
-  2030,
-]
 
 const ShowDate = ({
   date,
   period,
   onPeriodChange,
-  onYearChange,
 }) => {
-  const year = date.year()
   const day = `${date.format('DD')} de ${date.format('MMMM')}`
   const weekDay = date.format('dddd')
   const phrases = {
@@ -69,28 +41,6 @@ const ShowDate = ({
 
           </div>
         )}
-        <label
-          className="Datepicker__ShowDate_year_block"
-          htmlFor={constantLabelId}
-        >
-          {year}
-          <IconAngleBottom />
-
-          <select
-            id={constantLabelId}
-            onChange={onYearChange}
-            className="Datepicker__year"
-          >
-            {availableYears.map(itemYear => (
-              <option
-                key={itemYear}
-                value={itemYear}
-              >
-                {itemYear}
-              </option>
-            ))}
-          </select>
-        </label>
       </div>
       <div>
         <div className="Datepicker__ShowDate_day">{day}</div>
@@ -101,7 +51,6 @@ const ShowDate = ({
 }
 
 ShowDate.propTypes = {
-  onYearChange: func.isRequired,
   date: instanceOf(moment),
   period: string,
   onPeriodChange: func,

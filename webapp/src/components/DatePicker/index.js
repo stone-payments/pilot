@@ -6,10 +6,10 @@ import {
 import {
   merge,
   omit,
-  is,
   contains,
 } from 'ramda'
 import classNames from 'classnames'
+import clickOutside from 'react-onclickoutside'
 import IconAngleLeft from 'react-icons/lib/fa/angle-left'
 import IconAngleRight from 'react-icons/lib/fa/angle-right'
 
@@ -30,15 +30,6 @@ class DatePicker extends StateComponent {
     this.isDayBlocked = this.isDayBlocked.bind(this)
   }
 
-  onFocusChange (isFocused) {
-    if (isFocused === null) { return }
-
-    if (is(Boolean, isFocused)) {
-      this.setState({ focused: isFocused })
-    } else {
-      this.setState({ focusedInput: isFocused })
-    }
-  }
 
   isDayBlocked (day) {
     return this.props.disableWeekends && contains(day.day(), WEEKENDS)
@@ -163,6 +154,8 @@ DatePicker.defaultProps = {
   navNext: <IconAngleRight />,
   keepOpenOnDateSelect: true,
   readOnly: true,
+  displayFormat: 'DD/MMMM/YY',
+  monthFormat: 'MMMM',
 }
 
-export default DatePicker
+export default clickOutside(DatePicker)
