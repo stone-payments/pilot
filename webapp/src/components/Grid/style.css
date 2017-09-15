@@ -1,7 +1,7 @@
 @import "./properties.css";
 
-grid,
-grid * {
+.grid,
+.grid * {
   box-sizing: border-box;
 }
 
@@ -35,3 +35,26 @@ grid * {
   }
 }
 
+@media (--grid-media-tv) {
+  .grid {
+    background-color: blue;
+  }
+}
+
+@media (--grid-media-desktop) {
+  .grid {
+    background-color: red;
+  }
+}
+
+@media (--grid-media-tablet) {
+  .grid {
+    background-color: yellow;
+  }
+}
+
+@media (--grid-media-smartphone) {
+  .grid {
+    background-color: green;
+  }
+}
