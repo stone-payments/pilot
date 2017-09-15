@@ -19,7 +19,7 @@ storiesOf('Grid/Desktop', module)
       {range(1, 13).map(size => (
         <Row>
           {range(1, size).map(() => (
-            <Col desk={size}>
+            <Col desktop={size}>
               <Card>
                 <CardTitle>
                   Hello World {size}
@@ -41,7 +41,7 @@ storiesOf('Grid/Desktop', module)
     <Grid>
       {range(1, 13).map(size => (
         <Row>
-          <Col desk={size}>
+          <Col desktop={size}>
             <Card>
               <CardTitle>
                 Hello World {size}

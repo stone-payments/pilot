@@ -9,12 +9,12 @@ import classNames from 'classnames'
 
 import style from './style.css'
 
-const columnClassNames = ({ desk, tv, tablet }) =>
-  classNames(style.col, {
-    [style[`col-desk-${desk}`]]: desk,
-    [style[`col-tv-${tv}`]]: tv,
-    [style[`col-tablet-${tablet}`]]: tablet,
-  })
+const columnClassNames = ({ desktop, tv, tablet }) =>
+  classNames(style.col,
+    style[`col-desktop-${desktop}`],
+    style[`col-tv-${tv}`],
+    style[`col-tablet-${tablet}`]
+  )
 
 export const Grid = ({ children }) => (
   <div className={style.grid}>
@@ -28,8 +28,8 @@ export const Row = ({ children }) => (
   </div>
 )
 
-export const Col = ({ children, desk, tv, tablet }) => (
-  <div className={columnClassNames({ desk, tv, tablet })}>
+export const Col = ({ children, desktop, tv, tablet }) => (
+  <div className={columnClassNames({ desktop, tv, tablet })}>
     {children}
   </div>
 )
@@ -52,15 +52,14 @@ Row.defaultProps = {
 
 Col.propTypes = {
   children: element,
-  desk: number,
+  desktop: number,
   tv: number,
   tablet: number,
 }
 
 Col.defaultProps = {
   children: null,
-  desk: 12,
+  desktop: 12,
   tv: 12,
   tablet: 12,
 }
-
