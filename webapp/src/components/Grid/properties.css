@@ -3,5 +3,6 @@
 
 :root {
   --grid-column-spacing: 24px;
+  --grid-row-spacing: 24px;
 }
 

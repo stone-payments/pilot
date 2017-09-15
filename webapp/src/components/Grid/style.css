@@ -1,15 +1,22 @@
 @import "./properties.css";
 
-/* 24 * 11 */
-/* calc((100% - (11 * 24)) / 12) */
-
-
-* {
+grid,
+grid * {
   box-sizing: border-box;
 }
 
-.row {
+.grid {
+  width: 100%;
+}
+
+.grid > div {
   display: flex;
+  width: 100%;
+  margin-top: var(--grid-row-spacing);
+}
+
+.grid > div:last-child {
+  margin-top: unset;
 }
 
 .row > div {
@@ -18,10 +25,6 @@
 
 .row > div:first-child {
   margin-left: unset;
-}
-
-.col {
-  width: 100%;
 }
 
 @each $type in desk, tv, tablet {
