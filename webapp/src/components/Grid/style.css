@@ -1,4 +1,5 @@
 @import "./properties.css";
+@import "../../styles/media.css";
 
 .grid,
 .grid * {
@@ -58,3 +59,4 @@
     background-color: green;
   }
 }
+

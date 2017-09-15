@@ -16,6 +16,15 @@ import '../../src/styles/index.css'
 storiesOf('Grid', module)
   .add('Desktop', () => (
     <Grid>
+      <Row>
+        <Col tablet={6}>
+          <div style={{
+            backgroundColor: 'red',
+          }}>
+            Content
+          </div>
+        </Col>
+      </Row>
       {range(1, 12).map(size => (
         <Row>
           {range(1, size).map(() => (

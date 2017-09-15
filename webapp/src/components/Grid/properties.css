@@ -6,8 +6,3 @@
   --grid-row-spacing: 24px;
 }
 
-@custom-media --grid-media-tv screen and (width >= 1920px);
-@custom-media --grid-media-desktop screen and (width >= 1366px) and (width < 1920px);
-@custom-media --grid-media-tablet screen and (width > 640px) and (width < 1366px);
-@custom-media --grid-media-smartphone screen and (width <= 640px);
-
