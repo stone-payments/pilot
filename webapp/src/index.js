@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
+import Grid from './pages/Grid'
 
 import './style.css'
 
-const App = () =>
-  <h1>Hello world</h1>
+ReactDOM.render(
+  <Grid />,
+  document.getElementById('root')
+)
 
-
-ReactDOM.render(<App />, document.getElementById('root'))
 registerServiceWorker()
 

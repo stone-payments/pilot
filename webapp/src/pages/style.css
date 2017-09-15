@@ -1,0 +1,34 @@
+@import "./properties.css";
+
+/* 24 * 11 */
+/* calc((100% - (11 * 24)) / 12) */
+
+
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+}
+
+.row > div {
+  margin-left: var(--grid-column-spacing);
+}
+
+.row > div:first-child {
+  margin-left: unset;
+}
+
+.col {
+  width: 100%;
+}
+
+@each $type in desk, tv, tablet {
+  @each $size in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
+    .col-$(type)-$(size) {
+      width: calc(100% / (13 - $(size)));
+    }
+  }
+}
+

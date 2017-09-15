@@ -37,6 +37,7 @@ module.exports = {
               ident: 'postcss',
               plugins: () => [
                 require('postcss-import'),
+                require('postcss-each'),
                 require('postcss-url')({ url: postcssUrlRebase }),
               ],
             },

@@ -1,0 +1,7 @@
+/* 12 columns */
+/* 24px spacing */
+
+:root {
+  --grid-column-spacing: 24px;
+}
+

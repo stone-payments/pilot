@@ -184,6 +184,7 @@ module.exports = {
                 options: {
                   importLoaders: 1,
                   modules: 1,
+                  localIdentName: '[local]',
                 },
               },
               {
@@ -193,6 +194,7 @@ module.exports = {
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
+                    require('postcss-each'),
                     require('postcss-import'),
                     // This is necessary because postcss-url doesn't add
                     // a trailing ./ to rebased URLs, causing relative imports
