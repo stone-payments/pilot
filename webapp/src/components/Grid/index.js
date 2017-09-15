@@ -16,6 +16,8 @@ const columnClassNames = ({ desktop, tv, tablet }) =>
     style[`col-tablet-${tablet}`]
   )
 
+const gridMaxQty = 12
+
 export const Grid = ({ children }) => (
   <div className={style.grid}>
     {children}
@@ -59,7 +61,7 @@ Col.propTypes = {
 
 Col.defaultProps = {
   children: null,
-  desktop: 12,
-  tv: 12,
-  tablet: 12,
+  desktop: gridMaxQty,
+  tv: gridMaxQty,
+  tablet: gridMaxQty,
 }

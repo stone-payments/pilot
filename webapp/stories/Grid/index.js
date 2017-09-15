@@ -13,19 +13,22 @@ import {
 
 import '../../src/styles/index.css'
 
+const gridMaxQty = 12
+const equalDistributionExamples = [1, 2, 3, 4, 6, 12]
+
 storiesOf('Grid/Desktop', module)
-  .add('Full row', () => (
+  .add('Equal distribuition', () => (
     <Grid>
-      {range(1, 13).map(size => (
+      {equalDistributionExamples.map(size => (
         <Row>
-          {range(1, size).map(() => (
-            <Col desktop={size}>
+          {range(1, size + 1).map(() => (
+            <Col desktop={gridMaxQty/size}>
               <Card>
                 <CardTitle>
-                  Hello World {size}
+                  Hello World {gridMaxQty/size}
                 </CardTitle>
                 <CardText>
-                  CardTitle is defined but never used
+                  CardTitle is defined but never used 
                   no-unused-vars, CardTitle is defined
                   but never used  no-unused-vars
                 </CardText>
@@ -39,12 +42,12 @@ storiesOf('Grid/Desktop', module)
 
   .add('One column in each row', () => (
     <Grid>
-      {range(1, 13).map(size => (
+      {range(0, gridMaxQty).map(size => (
         <Row>
-          <Col desktop={size}>
+          <Col desktop={gridMaxQty - size}>
             <Card>
               <CardTitle>
-                Hello World {size}
+                Hello World {gridMaxQty - size}
               </CardTitle>
               <CardText>
                 CardTitle is defined but never used
