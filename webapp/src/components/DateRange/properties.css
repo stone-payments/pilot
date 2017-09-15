@@ -1,0 +1,12 @@
+@import "../../styles/typography.css";
+
+:root {
+  --date-offset-border-color: #e5e5e5;
+  --date-offset-root-border-color: var(--date-offset-border-color);
+  --date-offset-label-border-color: var(--date-offset-border-color);
+  --date-offset-label-font-family: var(--title-font-family);
+  --date-offset-label-font-size: 14px;
+  --date-offset-label-padding: 7px 11px;
+  --date-offset-label-background-color: #ffffff;
+  --date-offset-label-checked-background-image: var(--color-light-red-gradient);
+}
