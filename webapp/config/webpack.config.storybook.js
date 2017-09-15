@@ -38,6 +38,9 @@ module.exports = {
               plugins: () => [
                 require('postcss-import'),
                 require('postcss-each'),
+                require('postcss-cssnext')({
+                  features: { customProperties: false },
+                }),
                 require('postcss-url')({ url: postcssUrlRebase }),
               ],
             },
