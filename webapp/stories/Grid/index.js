@@ -13,8 +13,8 @@ import {
 
 import '../../src/styles/index.css'
 
-storiesOf('Grid', module)
-  .add('Desktop', () => (
+storiesOf('Grid/Desktop', module)
+  .add('Full row', () => (
     <Grid>
       {range(1, 13).map(size => (
         <Row>
@@ -32,6 +32,27 @@ storiesOf('Grid', module)
               </Card>
             </Col>
           ))}
+        </Row>
+      ))}
+    </Grid>
+  ))
+
+  .add('One column in each row', () => (
+    <Grid>
+      {range(1, 13).map(size => (
+        <Row>
+          <Col desk={size}>
+            <Card>
+              <CardTitle>
+                Hello World {size}
+              </CardTitle>
+              <CardText>
+                CardTitle is defined but never used
+                no-unused-vars, CardTitle is defined
+                but never used  no-unused-vars
+              </CardText>
+            </Card>
+          </Col>
         </Row>
       ))}
     </Grid>
