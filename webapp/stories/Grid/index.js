@@ -16,13 +16,13 @@ import '../../src/styles/index.css'
 storiesOf('Grid', module)
   .add('Desktop', () => (
     <Grid>
-      {range(1, 12).map(size => (
+      {range(1, 13).map(size => (
         <Row>
           {range(1, size).map(() => (
             <Col desk={size}>
               <Card>
                 <CardTitle>
-                  Hello World
+                  Hello World {size}
                 </CardTitle>
                 <CardText>
                   CardTitle is defined but never used
