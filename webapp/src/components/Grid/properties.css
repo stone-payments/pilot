@@ -2,6 +2,7 @@
 /* 24px spacing */
 
 :root {
+  --grid-max-qty: 12;
   --grid-column-spacing: 24px;
   --grid-row-spacing: 24px;
 }

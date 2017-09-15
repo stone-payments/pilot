@@ -32,7 +32,19 @@
   @media (--grid-media-$(type)) {
     @each $size in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 {
       .col-$(type)-$(size) {
-        width: calc(100% / 12 * $(size));
+        width: calc(
+          (
+            (
+              100% - (
+                (var(--grid-max-qty) - 1) * var(--grid-column-spacing)
+              )
+            ) / var(--grid-max-qty) * $(size)
+            +
+            (
+              var(--grid-column-spacing)
+            ) * ($(size) - 1)
+          )
+        );
       }
     }
   }
